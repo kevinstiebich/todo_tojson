@@ -11,7 +11,19 @@ class AppState {
     this.asksForDeletionConfirmation,
   });
 
-  Map<String, dynamic> toJson() {}
+  Map<String, dynamic> toJson(
+    List<Todo> todos,
+    bool isDarkMode,
+    bool? asksForDeletionConfirmation,
+  ) {
+    Map<String, dynamic> json = {
+      'todos': todos,
+      'isDarkMode': isDarkMode,
+      'asksForDeletionConfirmation': asksForDeletionConfirmation,
+    };
+
+    return json;
+  }
 
   factory AppState.fromJson(Map<String, dynamic> json) => AppState(
     todos: json['todos'],
