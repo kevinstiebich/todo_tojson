@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
 
 class Todo {
@@ -9,7 +8,7 @@ class Todo {
   Todo({String? id, required this.text, this.isCompleted = false})
     : id = id ?? Uuid().v4();
 
-  Map<String, dynamic> toJson(String id, String text, bool isCompleted) {
+  Map<String, dynamic> toJson() {
     Map<String, dynamic> json = {
       'id': id,
       'text': text,
@@ -25,9 +24,8 @@ class Todo {
     isCompleted: json['isCompleted'],
   );
 
-  // copyWith erstellt hier eine neue UUID, unklar ob das so gewollt ist, oder die alte übernommen werden soll
-  Todo copyWith({String? text, bool? isCompleted}) => Todo(
-    id: id,
+  Todo copyWith({String? id, String? text, bool? isCompleted}) => Todo(
+    id: id ?? this.id,
     text: text ?? this.text,
     isCompleted: isCompleted ?? this.isCompleted,
   );

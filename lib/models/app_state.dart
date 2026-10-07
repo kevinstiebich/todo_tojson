@@ -3,44 +3,50 @@ import 'package:i12_into_012/models/todo.dart';
 class AppState {
   final List<Todo> todos;
   final bool isDarkMode;
-  final bool? asksForDeletionConfirmation;
+  final bool asksForDeletionConfirmation;
+  final Set<String> selectedTodoIds; // For tracking selected items
 
   AppState({
-    required this.todos,
+    this.todos = const [],
     this.isDarkMode = false,
-    this.asksForDeletionConfirmation,
+    this.asksForDeletionConfirmation = true,
+    this.selectedTodoIds = const {},
   });
 
-  Map<String, dynamic> toJson(
-    List<Todo> todos,
-    bool isDarkMode,
-    bool? asksForDeletionConfirmation,
-  ) {
-    Map<String, dynamic> json = {
-      'todos': todos,
-      'isDarkMode': isDarkMode,
-      'asksForDeletionConfirmation': asksForDeletionConfirmation,
-    };
-
-    return json;
-  }
-
-  factory AppState.fromJson(Map<String, dynamic> json) => AppState(
-    todos: json['todos'],
-    isDarkMode: json['isDarkMode'],
-    asksForDeletionConfirmation: json['asksForDeletionConfirmation'],
-  );
-
+  // Create a copy with modified properties
   AppState copyWith({
     List<Todo>? todos,
     bool? isDarkMode,
     bool? asksForDeletionConfirmation,
+    Set<String>? selectedTodoIds,
   }) {
     return AppState(
       todos: todos ?? this.todos,
       isDarkMode: isDarkMode ?? this.isDarkMode,
       asksForDeletionConfirmation:
           asksForDeletionConfirmation ?? this.asksForDeletionConfirmation,
+      selectedTodoIds: selectedTodoIds ?? this.selectedTodoIds,
+    );
+  }
+
+  // Convert to JSON for storage
+  Map<String, dynamic> toJson() {
+    return {
+      'todos': todos.map((todo) => todo.toJson()).toList(),
+      'isDarkMode': isDarkMode,
+      'asksForDeletionConfirmation': asksForDeletionConfirmation,
+      // We don't persist selection state
+    };
+  }
+
+  // Create AppState from JSON
+  factory AppState.fromJson(Map<String, dynamic> json) {
+    return AppState(
+      todos: (json['todos'] as List)
+          .map((todoJson) => Todo.fromJson(todoJson))
+          .toList(),
+      isDarkMode: json['isDarkMode'] ?? false,
+      asksForDeletionConfirmation: json['asksForDeletionConfirmation'] ?? true,
     );
   }
 
