@@ -20,6 +20,43 @@ class TodoListScreen extends ConsumerWidget {
           style: TextStyle(color: Colors.black),
         ),
         actions: [
+          IconButton(
+            onPressed: () {
+              if (ref.read(appStateProvider).asksForDeletionConfirmation) {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Are you sure?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text('Cancel'),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            ref
+                                .read(appStateProvider.notifier)
+                                .deleteSelectedTodos();
+                            Navigator.pop(context);
+                          },
+                          child: const Text('Delete'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              } else {
+                ref.read(appStateProvider.notifier).deleteSelectedTodos();
+              }
+            },
+            icon: const Icon(
+              Icons.delete,
+              color: Colors.black,
+            ),
+          ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               shape: CircleBorder(),

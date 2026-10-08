@@ -8,7 +8,7 @@ class AppState {
 
   AppState({
     this.todos = const [],
-    this.isDarkMode = false,
+    this.isDarkMode = true,
     this.asksForDeletionConfirmation = true,
     this.selectedTodoIds = const {},
   });

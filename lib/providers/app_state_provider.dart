@@ -129,7 +129,7 @@ class AppStateNotifier extends Notifier<AppState> {
     // Initialize with default state
     return AppState(
       todos: [],
-      isDarkMode: false,
+      isDarkMode: true,
       asksForDeletionConfirmation: true,
     );
   }
