@@ -4,7 +4,6 @@ import 'package:i12_into_012/providers/app_state_provider.dart';
 import 'package:i12_into_012/screens/settings_screen.dart';
 import 'package:i12_into_012/widgets/add_todo_dialog.dart';
 import 'package:i12_into_012/widgets/todo_item.dart';
-import 'package:i12_into_012/screens/settings_screen.dart';
 
 class TodoListScreen extends ConsumerWidget {
   const TodoListScreen({super.key});
@@ -16,7 +15,10 @@ class TodoListScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 0, 253, 169),
-        title: Text('ToDo List'),
+        title: Text(
+          'ToDo List',
+          style: TextStyle(color: Colors.black),
+        ),
         actions: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(

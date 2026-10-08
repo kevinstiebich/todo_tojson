@@ -63,6 +63,7 @@ class AppStateNotifier extends Notifier<AppState> {
 
   void toggleDarkMode() {
     state = state.copyWith(isDarkMode: !state.isDarkMode);
+
     saveState();
   }
 

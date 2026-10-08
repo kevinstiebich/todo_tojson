@@ -32,12 +32,12 @@ class Todo {
 
   @override
   bool operator ==(Object other) {
-    if (other is Todo) {
-      return id == other.id;
-    } else
-      return false;
+    return other is Todo &&
+        id == other.id &&
+        text == other.text &&
+        isCompleted == other.isCompleted;
   }
 
   @override
-  int get hashCode => id.hashCode;
+  int get hashCode => Object.hash(id, text, isCompleted);
 }

@@ -52,12 +52,18 @@ class AppState {
 
   @override
   bool operator ==(Object other) {
-    if (other is AppState) {
-      return todos == other.todos;
-    } else
-      return false;
+    return other is AppState &&
+        todos == other.todos &&
+        isDarkMode == other.isDarkMode &&
+        asksForDeletionConfirmation == other.asksForDeletionConfirmation &&
+        selectedTodoIds == other.selectedTodoIds;
   }
 
   @override
-  int get hashCode => todos.hashCode;
+  int get hashCode => Object.hash(
+    todos,
+    isDarkMode,
+    asksForDeletionConfirmation,
+    selectedTodoIds,
+  );
 }
