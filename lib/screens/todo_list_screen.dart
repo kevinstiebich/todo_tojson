@@ -73,11 +73,13 @@ class TodoListScreen extends ConsumerWidget {
         ],
       ),
       body: ListView(
-        children: todos.map((todo) {
-          return TodoItem(
-            todo: todo,
-          );
-        }).toList(),
+        children: todos
+            .map(
+              (todo) => TodoItem(
+                todo: todo,
+              ),
+            )
+            .toList(),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
