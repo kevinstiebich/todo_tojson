@@ -126,7 +126,8 @@ class AppStateNotifier extends Notifier<AppState> {
 
   @override
   AppState build() {
-    // Initialize with default state
+    Future.microtask(loadState);
+
     return AppState(
       todos: [],
       isDarkMode: true,

@@ -18,6 +18,9 @@ class StorageService {
     final file = await _localFile;
     final jsonString = jsonEncode(state.toJson());
     await file.writeAsString(jsonString);
+
+    print('JSON gespeichert unter: ${file.path}');
+    print('Gespeicherter Inhalt: $jsonString');
   }
 
   Future<AppState?> loadAppState() async {

@@ -9,13 +9,11 @@ class Todo {
     : id = id ?? Uuid().v4();
 
   Map<String, dynamic> toJson() {
-    Map<String, dynamic> json = {
+    return {
       'id': id,
       'text': text,
       'isCompleted': isCompleted,
     };
-
-    return json;
   }
 
   factory Todo.fromJson(Map<String, dynamic> json) => Todo(
